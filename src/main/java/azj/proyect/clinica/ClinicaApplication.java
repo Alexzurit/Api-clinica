@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class ClinicaApplication {
 	//VERIFICAR AUTOMATICAMENTE LA CONEXION
+	// Hola
 	@Autowired
 	private DataSource dataSource;
 
