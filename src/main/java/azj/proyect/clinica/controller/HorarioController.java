@@ -1,0 +1,18 @@
+package azj.proyect.clinica.controller;
+
+import azj.proyect.clinica.entity.Horario;
+import azj.proyect.clinica.service.HorarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/horarios")
+public class HorarioController {
+    @Autowired
+    private HorarioService horarioService;
+
+    @GetMapping
+    public List<Horario> listarHorarios() { return horarioService.obtenerTodos(); }
+}

@@ -1,6 +1,9 @@
 package azj.proyect.clinica.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*; //Para manejar la persistencia de datos
 import lombok.*; //Para omitir getters y setters
+
+import java.util.List;
 
 @Entity
 @Table(name = "paciente")
@@ -32,4 +35,9 @@ public class Paciente {
     private String fechaNacimiento;
     @Column(name = "direccion")
     private String direccion;
+
+    //para relación en tabla Reservacitas
+    @OneToMany(mappedBy = "paciente")
+    @JsonIgnore
+    private List<Reservacita> tbReservacita;
 }

@@ -1,7 +1,10 @@
 package azj.proyect.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "doctor")
@@ -24,5 +27,10 @@ public class Doctor {
     @ManyToOne //(fetch = FetchType.LAZY) //evita que al listar doctores, Spring cargue automáticamente toda la entidad Especialidad
     @JoinColumn(name = "idespecialidad")
     private Especialidad especialidad;
+
+    //para las relaciones en tabla Horarios
+    @OneToMany(mappedBy = "doctor")
+    @JsonIgnore //Cortar bucle de serialización
+    private List<Horario> tbHorario;
 
 }
