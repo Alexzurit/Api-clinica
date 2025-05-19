@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EspecialidadService {
@@ -13,4 +14,8 @@ public class EspecialidadService {
     private EspecialidadRepository especialidadRepository;
 
     public List<Especialidad> obtenerTodos(){ return especialidadRepository.findAll(); }
+
+    public Optional<Especialidad> obtenerPorId(int idespecialidad) {
+        return especialidadRepository.findById(idespecialidad);
+    }
 }
