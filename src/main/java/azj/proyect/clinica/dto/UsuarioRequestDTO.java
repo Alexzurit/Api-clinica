@@ -3,6 +3,8 @@ package azj.proyect.clinica.dto; //para crear editar usuarios
 import azj.proyect.clinica.enums.EstadoUsuario;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,4 +13,5 @@ public class UsuarioRequestDTO {
     private String email;
     private String password;
     private EstadoUsuario estado;
+    private List<Integer> rolesIds; // Solo IDs de roles
 }

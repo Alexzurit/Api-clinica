@@ -43,4 +43,9 @@ public class UsuarioController {
         usuarioService.eliminarUsuario(id);
         return ResponseEntity.ok("Usuario eliminado correctamente");
     }
+
+    @PutMapping("/{idUsuario}/roles")
+    public UsuarioDTO actualizarRoles(@PathVariable int idUsuario, @RequestBody List<Integer> rolesIds) {
+        return usuarioService.actualizarRolesUsuario(idUsuario, rolesIds);
+    }
 }

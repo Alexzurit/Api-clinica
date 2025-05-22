@@ -2,13 +2,16 @@ package azj.proyect.clinica.service;
 
 import azj.proyect.clinica.dto.UsuarioDTO;
 import azj.proyect.clinica.dto.UsuarioRequestDTO;
+import azj.proyect.clinica.entity.Rol;
 import azj.proyect.clinica.entity.Usuario;
 import azj.proyect.clinica.mapper.UsuarioMapper;
+import azj.proyect.clinica.repository.RolRepository;
 import azj.proyect.clinica.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,6 +21,8 @@ public class UsuarioService {
 
     @Autowired
     private  UsuarioRepository usuarioRepository;
+    @Autowired
+    private RolRepository rolRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -38,6 +43,11 @@ public class UsuarioService {
         Usuario usuario = UsuarioMapper.toEntity(dto);
         //Agregar logica para encriptar contraseña
         usuario.setPass(passwordEncoder.encode(dto.getPassword()));
+        List<Rol> roles = dto.getRolesIds().stream()
+                .map(idRol -> rolRepository.findById(idRol)
+                        .orElseThrow(() -> new RuntimeException("Rol No encontrado")))
+                .toList();
+        usuario.setRoles(roles);
         Usuario guardado = usuarioRepository.save(usuario);
         //retornarusuario despues de guardar
         guardado = usuarioRepository.findById(guardado.getIdUsuario()).orElse(guardado);
@@ -65,5 +75,23 @@ public class UsuarioService {
             throw new RuntimeException("Usuario no encontrado");
         }
         usuarioRepository.deleteById(id);
+    }
+    //Actualizar rol de usuarios
+    public UsuarioDTO actualizarRolesUsuario(int idUsuario, List<Integer> rolesIds) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Obtener los roles desde la BD usando los IDs
+        List<Rol> roles = new ArrayList<>(usuario.getRoles()); // ✅ Convierte la lista a una versión modificable
+        roles.clear(); // Borra los roles anteriores
+        roles.addAll(rolesIds.stream()
+                .map(idRol -> rolRepository.findById(idRol)
+                        .orElseThrow(() -> new RuntimeException("Rol no encontrado")))
+                .toList()); // Agrega los nuevos roles
+
+        usuario.setRoles(roles); // Asignar los nuevos roles
+        usuarioRepository.save(usuario); // Guardar cambios
+
+        return UsuarioMapper.toDTO(usuario); // Retornar como DTO
     }
 }

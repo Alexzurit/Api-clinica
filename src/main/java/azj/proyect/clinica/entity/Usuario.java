@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_usuario")
 @Data
@@ -35,4 +38,12 @@ public class Usuario {
     @Column(name = "fecha_creacion", updatable = false)
     private java.sql.Timestamp fechaCreacion;
 
+    @ManyToMany
+    @JoinTable(
+            name = "tb_usuario_rol",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_rol")
+    )
+    //private List<Rol> roles; //relacion con el rol
+    private List<Rol> roles = new ArrayList<>(); //Lista modificable
 }
