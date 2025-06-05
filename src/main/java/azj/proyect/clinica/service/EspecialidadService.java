@@ -26,7 +26,9 @@ public class EspecialidadService {
     public Especialidad actualizarEspecialidad(int idespecialidad, Especialidad nuevaEspecialidad){
         Especialidad especialidadExistente = especialidadRepository.findById(idespecialidad)
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada"));
-        especialidadExistente.setTitulo(nuevaEspecialidad.getTitulo());
+        especialidadExistente.setNombre(nuevaEspecialidad.getNombre());
+        especialidadExistente.setDescripcion(nuevaEspecialidad.getDescripcion());
+        especialidadExistente.setEstado(nuevaEspecialidad.getEstado());
         return especialidadRepository.save(especialidadExistente);
     }
     //Eliminar especialidad

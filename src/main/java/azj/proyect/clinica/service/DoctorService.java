@@ -36,8 +36,9 @@ public class DoctorService {
         Doctor doctorExistente = doctorRepository.findById(idDoctor)
                 .orElseThrow(() -> new RuntimeException("Doctor no encontrado"));
         doctorExistente.setNombres(nuevoDoctor.getNombres());
-        doctorExistente.setApellidoPat(nuevoDoctor.getApellidoPat());
-        doctorExistente.setApellidoMat(nuevoDoctor.getApellidoMat());
+        doctorExistente.setApellidos(nuevoDoctor.getApellidos());
+        //doctorExistente.setApellidoPat(nuevoDoctor.getApellidoPat());
+        //doctorExistente.setApellidoMat(nuevoDoctor.getApellidoMat());
         // Obtener especialidad desde la BD si se ha cambiado
         if (nuevoDoctor.getEspecialidad() != null) {
             Especialidad especialidad = especialidadRepository.findById(nuevoDoctor.getEspecialidad().getIdespecialidad())

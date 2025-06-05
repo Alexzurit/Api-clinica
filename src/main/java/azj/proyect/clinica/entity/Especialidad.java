@@ -15,11 +15,15 @@ import java.util.List;
 public class Especialidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idespecialidad")
+    @Column(name = "id_especialidad")
     private int idespecialidad;
 
-    @Column(name = "titulo")
-    private String titulo;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "estado")
+    private Short estado;
 
     @OneToMany(mappedBy = "especialidad")
     @JsonIgnore //Esto evita que al serializar Especialidad, también se serialicen sus Doctores, cortando el bucle infinito.
