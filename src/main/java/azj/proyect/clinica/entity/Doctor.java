@@ -15,7 +15,7 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_doctor")
-    private int id_doctor;
+    private int idDoctor;
 
     @Column(name = "nombres")
     private String nombres;
@@ -40,9 +40,12 @@ public class Doctor {
     @JoinColumn(name = "id_especialidad")
     private Especialidad especialidad;
 
-    //para las relaciones en tabla Horarios
-    @OneToMany(mappedBy = "doctor")
+    //para las relaciones en tabla disponibilidad
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    //cascade = CascadeType.ALL si deseas que los cambios en Doctor, Sede o Horario afecten también las Disponibilidades asociadas
+    /*orphanRemoval = true para que cuando elimines un Doctor, Sede o Horario,
+    sus Disponibilidades asociadas también se eliminen automáticamente.*/
     @JsonIgnore //Cortar bucle de serialización
-    private List<Horario> tbHorario;
+    private List<Disponibilidad> disponibilidades;
 
 }

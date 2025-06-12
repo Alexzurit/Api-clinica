@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -14,27 +15,41 @@ import java.util.List;
 public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idhorario")
+    @Column(name = "id_horario")
     private int idHorario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_doctor")
-    private Doctor doctor;
-    @ManyToOne
-    @JoinColumn(name = "idsede")
-    private Sede sede;
+    @Column(name = "dia_semana")
+    private String diaSemana;
+    @Column(name = "hora_inicio")
+    private LocalTime horaInicio;
+    @Column(name = "hora_fin")
+    private LocalTime horaFin;
+    @Column(name = "estado")
+    private Short estado;
 
-    @Column(name = "fecha")
-    private String fecha;
-    @Column(name = "dia")
-    private String dia;
-    @Column(name = "hora")
-    private String hora;
-    @Column(name = "disponibilidad")
-    private byte disponibilidad;
-
-    //para relacion con tabla reservacita
-    @OneToMany(mappedBy = "horario")
-    @JsonIgnore
-    private List<Reservacita> tbReservacita;
+    @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore //Cortar bucle de serialización
+    private List<Disponibilidad> disponibilidades;
 }
+/*
+@Service
+public class EventoService {
+    @Autowired
+    private EventoRepository eventoRepository;
+
+    public void crearEvento() {
+        Evento evento = new Evento();
+        evento.setHoraInicio(LocalTime.of(14, 30)); // 14:30 PM
+        eventoRepository.save(evento);
+    }
+
+    public LocalTime obtenerHoraEvento(Long id) {
+        return eventoRepository.findById(id).orElseThrow().getHoraInicio();
+    }
+}
+para manejar estados:
+public static final Short ESTADO_INACTIVO = 0;
+public static final Short ESTADO_ACTIVO = 1;
+public static final Short ESTADO_SUSPENDIDO = 2;
+
+*/

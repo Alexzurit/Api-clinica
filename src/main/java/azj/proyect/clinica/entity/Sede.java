@@ -14,18 +14,20 @@ import java.util.List;
 public class Sede {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idsede")
+    @Column(name = "id_sede")
     private int idsede;
 
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "direccion")
     private String direccion;
-    @Column(name = "ruc")
-    private String ruc;
+    @Column(name = "distrito")
+    private String distrito;
+    @Column(name = "estado")
+    private Short estado;
 
-    //para las relaciones en tabla Horarios
-    @OneToMany(mappedBy = "sede")
-    @JsonIgnore //Cortar bucle de serialización
-    private List<Horario> tbHorario;
+    //para las relaciones en tabla Disponibilidad
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Disponibilidad> disponibilidades;
 }

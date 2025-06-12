@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*; //Para manejar la persistencia de datos
 import lombok.*; //Para omitir getters y setters
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,27 +15,30 @@ import java.util.List;
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idpaciente")
+    @Column(name = "id_paciente")
     private int idpaciente;
 
-    @Column(name = "dni", nullable = false, unique = true)
-    private int dni;
 
     //@Column(columnDefinition = "TEXT")
-    @Column(name = "token")
-    private String token;
     @Column(name = "nombres")
     private String nombres;
-    @Column(name = "apellidoPaterno")
-    private String apellidoPaterno;
-    @Column(name = "apellidoMaterno")
-    private String apellidoMaterno;
+    @Column(name = "apellidos")
+    private String apellidos;
+    @Column(name = "dni", nullable = false, unique = true)
+    private String dni;
+    @Column(name = "correo")
+    private String correo;
+    @Column(name = "celular")
+    private String celular;
+    @Column(name = "direccion", columnDefinition = "TEXT")
+    private String direccion;
+    @Column(name = "fechaNacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
     @Column(name = "sexo")
     private String sexo;
-    @Column(name = "fechaNacimiento")
-    private String fechaNacimiento;
-    @Column(name = "direccion")
-    private String direccion;
+    @Column(name = "estado")
+    private Short estado;
 
     //para relación en tabla Reservacitas
     @OneToMany(mappedBy = "paciente")
