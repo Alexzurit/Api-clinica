@@ -18,11 +18,11 @@ public class Cita {
 
     //Relacionar
     @ManyToOne
-    @Column(name = "id_paciente")
+    @JoinColumn(name = "id_paciente")
     private Paciente paciente;
     //Relacionar
     @ManyToOne
-    @Column(name = "id_disponibilidad")
+    @JoinColumn(name = "id_disponibilidad")
     private Disponibilidad disponibilidad;
 
     @Column(name = "fecha")
