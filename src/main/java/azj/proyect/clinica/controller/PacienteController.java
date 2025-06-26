@@ -22,4 +22,10 @@ public class PacienteController {
     public Paciente crearPaciente(@RequestBody Paciente paciente) {
         return pacienteService.guardarPaciente(paciente);
     }
+
+    @PutMapping("/{id}")
+    public Paciente actualizarPaciente(@PathVariable int id, @RequestBody Paciente paciente) {
+        return pacienteService.actualizarPaciente(id, paciente);
+    }
+
 }
