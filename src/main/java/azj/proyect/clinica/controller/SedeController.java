@@ -15,4 +15,15 @@ public class SedeController {
 
     @GetMapping
     public List<Sede> listarSedes () { return sedeService.obtenerTodos(); }
+
+    @PostMapping
+    public Sede crearSede(@RequestBody Sede sede) {
+        return sedeService.guardarSede(sede);
+    }
+
+    @PutMapping("/{id}")
+    public Sede actualizarSede(@PathVariable int id, @RequestBody Sede sede) {
+        return sedeService.actualizarSede(id, sede);
+    }
+
 }
