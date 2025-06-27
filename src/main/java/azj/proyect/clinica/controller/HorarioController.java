@@ -15,4 +15,15 @@ public class HorarioController {
 
     @GetMapping
     public List<Horario> listarHorarios() { return horarioService.obtenerTodos(); }
+
+    @PostMapping
+    public Horario crearHorario(@RequestBody Horario horario) {
+        return horarioService.guardar(horario);
+    }
+
+    @PutMapping("/{id}")
+    public Horario actualizarHorario(@PathVariable int id, @RequestBody Horario horario) {
+        return horarioService.actualizar(id, horario);
+    }
+
 }

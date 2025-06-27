@@ -13,4 +13,20 @@ public class HorarioService {
     private HorarioRepository horarioRepository;
 
     public List<Horario> obtenerTodos() { return horarioRepository.findAll(); }
+
+    public Horario guardar(Horario horario) {
+        return horarioRepository.save(horario);
+    }
+
+    public Horario actualizar(int id, Horario horarioActualizado) {
+        Horario horarioExistente = horarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Horario no encontrado con ID: " + id));
+
+        horarioExistente.setDiaSemana(horarioActualizado.getDiaSemana());
+        horarioExistente.setHoraInicio(horarioActualizado.getHoraInicio());
+        horarioExistente.setHoraFin(horarioActualizado.getHoraFin());
+        horarioExistente.setEstado(horarioActualizado.getEstado());
+
+        return horarioRepository.save(horarioExistente);
+    }
 }
