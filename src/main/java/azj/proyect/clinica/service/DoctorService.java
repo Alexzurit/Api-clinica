@@ -32,21 +32,29 @@ public class DoctorService {
     }
 
     //Actualizar doctor
-    public Doctor actualizarDoctor(int idDoctor, Doctor nuevoDoctor){
+    public Doctor actualizarDoctor(int idDoctor, Doctor nuevoDoctor) {
         Doctor doctorExistente = doctorRepository.findById(idDoctor)
                 .orElseThrow(() -> new RuntimeException("Doctor no encontrado"));
+
+        // Actualizar todos los campos relevantes
         doctorExistente.setNombres(nuevoDoctor.getNombres());
         doctorExistente.setApellidos(nuevoDoctor.getApellidos());
-        //doctorExistente.setApellidoPat(nuevoDoctor.getApellidoPat());
-        //doctorExistente.setApellidoMat(nuevoDoctor.getApellidoMat());
-        // Obtener especialidad desde la BD si se ha cambiado
+        doctorExistente.setDni(nuevoDoctor.getDni());
+        doctorExistente.setCmp(nuevoDoctor.getCmp());
+        doctorExistente.setCorreo(nuevoDoctor.getCorreo());
+        doctorExistente.setCelular(nuevoDoctor.getCelular());
+        doctorExistente.setEstado(nuevoDoctor.getEstado());
+
+        // Actualizar especialidad si es que se envió
         if (nuevoDoctor.getEspecialidad() != null) {
             Especialidad especialidad = especialidadRepository.findById(nuevoDoctor.getEspecialidad().getIdespecialidad())
                     .orElseThrow(() -> new RuntimeException("Especialidad no encontrada"));
             doctorExistente.setEspecialidad(especialidad);
         }
+
         return doctorRepository.save(doctorExistente);
     }
+
     //Eliminar Doctor
     public void eliminarDoctor(int idDoctor){
         if (!doctorRepository.existsById(idDoctor)){
