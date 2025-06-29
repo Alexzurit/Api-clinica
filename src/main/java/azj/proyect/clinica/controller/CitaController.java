@@ -28,8 +28,9 @@ public class CitaController {
         return citaService.guardarCita(cita);
     }
 
-    @PutMapping
-    public Cita actualizarCita(@PathVariable int id, @RequestBody Cita cita){
+    @PutMapping("/{id}")
+    public Cita actualizarCita(@PathVariable int id, @RequestBody Cita cita) {
         return citaService.actualizarCita(id, cita);
     }
+
 }
