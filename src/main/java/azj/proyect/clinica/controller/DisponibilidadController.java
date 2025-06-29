@@ -37,4 +37,14 @@ public class DisponibilidadController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Disponibilidad> actualizar(@PathVariable int id, @RequestBody Disponibilidad disponibilidad) {
+        return disponibilidadService.obtenerPorId(id)
+                .map(disponibilidadExistente -> {
+                    disponibilidad.setIdDispon(id); // Asegurar que se actualice la disponibilidad correcta
+                    Disponibilidad actualizada = disponibilidadService.guardarDisponibilidad(disponibilidad);
+                    return ResponseEntity.ok(actualizada);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
