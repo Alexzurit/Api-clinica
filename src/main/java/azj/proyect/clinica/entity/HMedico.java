@@ -2,8 +2,7 @@ package azj.proyect.clinica.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "historial_medico")
@@ -16,20 +15,19 @@ public class HMedico {
     @Column(name = "id_historial")
     private int idHistorial;
 
-    //a esto falta su relacion con la tabla cita
-    @Column(name = "id_cita")
-    private int idCita;
-
-    //Al parecer este tambien
-    @Column(name = "id_paciente")
-    private int idPaciente;
+    @ManyToOne
+    @JoinColumn(name = "id_cita", nullable = false)
+    private Cita cita;
 
     @Column(name = "fecha_Registro")
-    private LocalDate fechaRegistro;
+    private LocalDateTime fechaRegistro;
+
     @Column(name = "diagnostico", columnDefinition = "TEXT")
     private String diagnostico;
+
     @Column(name = "tratamiento", columnDefinition = "TEXT")
     private String tratamiento;
+
     @Column(name = "receta", columnDefinition = "TEXT")
     private String receta;
 }
