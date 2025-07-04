@@ -22,7 +22,7 @@ public class UsuarioMapper {
         }
         return new UsuarioDTO(
                 usuario.getIdUsuario(),
-                usuario.getDni(),
+                //usuario.getDni(),
                 usuario.getEmail(),
                 usuario.getEstado(),
                 //usuario.getFechaCreacion() != null ? usuario.getFechaCreacion().toString() : null
@@ -33,7 +33,7 @@ public class UsuarioMapper {
 
     public static Usuario toEntity(UsuarioRequestDTO dto) {
         Usuario usuario = new Usuario();
-        usuario.setDni(dto.getDni());
+        //usuario.setDni(dto.getDni());
         usuario.setEmail(dto.getEmail());
         usuario.setEstado(dto.getEstado());
         return usuario;

@@ -41,7 +41,7 @@ public class DoctorService {
         doctorExistente.setApellidos(nuevoDoctor.getApellidos());
         doctorExistente.setDni(nuevoDoctor.getDni());
         doctorExistente.setCmp(nuevoDoctor.getCmp());
-        doctorExistente.setCorreo(nuevoDoctor.getCorreo());
+        //doctorExistente.setCorreo(nuevoDoctor.getCorreo()); correo ya no habrá en doctor, se  usará solo el de usuarios
         doctorExistente.setCelular(nuevoDoctor.getCelular());
         doctorExistente.setEstado(nuevoDoctor.getEstado());
 

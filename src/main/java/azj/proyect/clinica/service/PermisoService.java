@@ -39,7 +39,7 @@ public class PermisoService {
             permisoExistente.setRol(rol);
         }
 
-        permisoExistente.setUrl(nuevoPermiso.getUrl());
+        permisoExistente.setRuta(nuevoPermiso.getRuta()); //
 
         return permisoRepository.save(permisoExistente);
     }

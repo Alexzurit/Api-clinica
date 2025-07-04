@@ -59,7 +59,7 @@ public class UsuarioService {
         Usuario usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        usuarioExistente.setDni(dto.getDni());
+        //usuarioExistente.setDni(dto.getDni()); En Usuario se quito DNI
         usuarioExistente.setEmail(dto.getEmail());
         usuarioExistente.setEstado(dto.getEstado());
         //Solo actualiza la contraseña si se proporciona una nueva

@@ -2,6 +2,7 @@ package azj.proyect.clinica.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,4 +21,7 @@ public class Rol {
 
     @ManyToMany(mappedBy = "roles")
     private List<Usuario> usuarios;
+
+    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    private List<Permiso> permisos = new ArrayList<>();
 }

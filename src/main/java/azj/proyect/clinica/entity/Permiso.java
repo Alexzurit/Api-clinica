@@ -14,10 +14,11 @@ public class Permiso {
     @Column(name = "id_permiso")
     private int idPermiso;
 
+    @Column(name = "ruta")
+    private String ruta;
+
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private Rol rol;
 
-    @Column(name = "url")
-    private String url;
 }

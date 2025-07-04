@@ -30,8 +30,8 @@ public class Doctor {
     private String dni;
     @Column(name = "cmp")
     private String cmp;
-    @Column(name = "correo")
-    private String correo;
+    //@Column(name = "correo") CORREO SE VA
+    //private String correo;
     @Column(name = "celular")
     private String celular;
     @Column(name = "estado")

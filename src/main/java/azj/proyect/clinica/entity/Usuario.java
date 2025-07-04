@@ -19,8 +19,8 @@ public class Usuario {
     @Column(name = "id_usuario")
     private int idUsuario;
 
-    @Column(name = "dni")
-    private String dni;
+    //@Column(name = "dni") DNI SE VA
+    //private String dni;
 
     @Column(name = "email")
     private String email;

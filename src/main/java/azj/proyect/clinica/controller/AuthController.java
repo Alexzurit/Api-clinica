@@ -20,7 +20,6 @@ public class AuthController {
         return authService.autenticarUsuario(request.getEmail(), request.getPassword())
                 .<ResponseEntity<Object>>map(usuario -> ResponseEntity.ok((Object) new UsuarioDTO(
                         usuario.getIdUsuario(),
-                        usuario.getDni(),
                         usuario.getEmail(),
                         usuario.getEstado(),
                         usuario.getFechaCreacion() != null ? usuario.getFechaCreacion().toString() : null

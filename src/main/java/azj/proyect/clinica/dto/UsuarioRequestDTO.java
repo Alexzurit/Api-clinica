@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioRequestDTO {
-    private String dni;
+    //private String dni;
     private String email;
     private String password;
     private EstadoUsuario estado;
