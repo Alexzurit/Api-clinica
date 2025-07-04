@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cita")
@@ -26,7 +27,7 @@ public class Cita {
     private Disponibilidad disponibilidad;
 
     @Column(name = "fecha")
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     @Column(name = "estado")
     private Short estado;
     @Column(name = "motivo_consulta", columnDefinition = "TEXT")

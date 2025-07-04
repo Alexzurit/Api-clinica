@@ -13,4 +13,8 @@ import java.util.List;
 public interface CitaRepository extends JpaRepository<Cita, Integer>{
     @Query("SELECT c.paciente FROM Cita c WHERE c.disponibilidad.doctor.idDoctor = :idDoctor")
     List<Paciente> findPacientesByDoctorId(@Param("idDoctor") int idDoctor);
+
+    /*Lo de abajoEsto carga citas completas con pacientes adjuntos */
+    @Query("SELECT c FROM Cita c WHERE c.disponibilidad.doctor.idDoctor = :idDoctor")
+    List<Cita> findCitasByDoctorId(@Param("idDoctor") int idDoctor);
 }

@@ -1,8 +1,10 @@
 package azj.proyect.clinica.service;
 
 import azj.proyect.clinica.dto.DoctorResponseDTO;
+import azj.proyect.clinica.dto.PacienteCitaDTO;
 import azj.proyect.clinica.dto.RegistroDoctorDTO;
 import azj.proyect.clinica.entity.*;
+import azj.proyect.clinica.mapper.PacienteCitaMapper;
 import azj.proyect.clinica.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -22,6 +25,10 @@ public class DoctorService {
     /*NOSEEE*/
     @Autowired
     private CitaRepository citaRepository;
+
+    @Autowired
+    private PacienteCitaMapper pacienteCitaMapper;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -122,5 +129,14 @@ public class DoctorService {
     public List<Paciente> obtenerPacientesDelDoctor(int idDoctor) {
         return citaRepository.findPacientesByDoctorId(idDoctor);
     }
+
+    /*Pacientes con cita relacionada a doctor*/
+    public List<PacienteCitaDTO> obtenerPacientesConCitaPorDoctor(int idDoctor) {
+        List<Cita> citas = citaRepository.findCitasByDoctorId(idDoctor);
+        return citas.stream()
+                .map(pacienteCitaMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 
 }

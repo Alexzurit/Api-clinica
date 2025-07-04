@@ -1,6 +1,7 @@
 package azj.proyect.clinica.controller;
 
 import azj.proyect.clinica.dto.DoctorResponseDTO;
+import azj.proyect.clinica.dto.PacienteCitaDTO;
 import azj.proyect.clinica.dto.PacienteDTO;
 import azj.proyect.clinica.dto.RegistroDoctorDTO;
 import azj.proyect.clinica.entity.Doctor;
@@ -69,6 +70,7 @@ public class DoctorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
+    // solo pacientes por doctor
     @GetMapping("/{idDoctor}/pacientes")
     public ResponseEntity<List<PacienteDTO>> listarPacientesPorDoctor(@PathVariable int idDoctor) {
         List<Paciente> pacientes = doctorService.obtenerPacientesDelDoctor(idDoctor);
@@ -78,4 +80,9 @@ public class DoctorController {
         return ResponseEntity.ok(pacienteDTOs);
     }
 
+    @GetMapping("/{idDoctor}/pacientes-citas") //listar los pacientes y sus citas relacionado a cierto doctor
+    public ResponseEntity<List<PacienteCitaDTO>> listarPacientesConCitas(@PathVariable int idDoctor) {
+        List<PacienteCitaDTO> respuesta = doctorService.obtenerPacientesConCitaPorDoctor(idDoctor);
+        return ResponseEntity.ok(respuesta);
+    }
 }
