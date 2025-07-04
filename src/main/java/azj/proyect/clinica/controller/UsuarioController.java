@@ -44,8 +44,12 @@ public class UsuarioController {
         return ResponseEntity.ok("Usuario eliminado correctamente");
     }
 
-    @PutMapping("/{idUsuario}/roles")
-    public UsuarioDTO actualizarRoles(@PathVariable int idUsuario, @RequestBody List<Integer> rolesIds) {
+    //@PutMapping("/{idUsuario}/roles")
+    /*public UsuarioDTO actualizarRoles(@PathVariable int idUsuario, @RequestBody List<Integer> rolesIds) {
         return usuarioService.actualizarRolesUsuario(idUsuario, rolesIds);
+    }*/
+    @PutMapping("/{idUsuario}/rol")
+    public UsuarioDTO actualizarRol(@PathVariable int idUsuario, @RequestBody Integer rolId) {
+        return usuarioService.actualizarRolUsuario(idUsuario, rolId);
     }
 }

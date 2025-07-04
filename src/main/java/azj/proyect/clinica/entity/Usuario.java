@@ -38,12 +38,15 @@ public class Usuario {
     @Column(name = "fecha_creacion", updatable = false)
     private java.sql.Timestamp fechaCreacion;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "tb_usuario_rol",
             joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_rol")
-    )
+    )*/
+    @ManyToOne
+    @JoinColumn(name = "id_rol", nullable = false)
+    private Rol rol;
     //private List<Rol> roles; //relacion con el rol
-    private List<Rol> roles = new ArrayList<>(); //Lista modificable
+    //private List<Rol> roles = new ArrayList<>(); //Lista modificable
 }

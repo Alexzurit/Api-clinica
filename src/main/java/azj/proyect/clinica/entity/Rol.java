@@ -19,9 +19,11 @@ public class Rol {
     @Column(name = "nombre_rol")
     private String nombreRol;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuarios;
+    /*@ManyToMany(mappedBy = "roles")
+    private List<Usuario> usuarios;*/
 
+    /*@OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    private List<Permiso> permisos = new ArrayList<>();*/
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
-    private List<Permiso> permisos = new ArrayList<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 }

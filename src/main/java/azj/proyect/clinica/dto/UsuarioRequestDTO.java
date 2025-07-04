@@ -13,5 +13,6 @@ public class UsuarioRequestDTO {
     private String email;
     private String password;
     private EstadoUsuario estado;
-    private List<Integer> rolesIds; // Solo IDs de roles
+    //private List<Integer> rolesIds; // Solo IDs de roles
+    private Integer rolId; // 👈 Antes era List<Integer>, ahora solo uno
 }

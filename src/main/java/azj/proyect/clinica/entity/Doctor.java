@@ -36,6 +36,7 @@ public class Doctor {
     private String celular;
     @Column(name = "estado")
     private Short estado;
+    @JsonIgnore
     @ManyToOne //(fetch = FetchType.LAZY) //evita que al listar doctores, Spring cargue automáticamente toda la entidad Especialidad
     @JoinColumn(name = "id_especialidad")
     private Especialidad especialidad;
@@ -47,5 +48,9 @@ public class Doctor {
     sus Disponibilidades asociadas también se eliminen automáticamente.*/
     @JsonIgnore //Cortar bucle de serialización
     private List<Disponibilidad> disponibilidades;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
 }

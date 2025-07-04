@@ -1,8 +1,11 @@
 package azj.proyect.clinica.controller;
 
+import azj.proyect.clinica.dto.DoctorResponseDTO;
+import azj.proyect.clinica.dto.RegistroDoctorDTO;
 import azj.proyect.clinica.entity.Doctor;
 import azj.proyect.clinica.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,4 +41,23 @@ public class DoctorController {
         doctorService.eliminarDoctor(id);
         return ResponseEntity.ok("Doctor Eliminado de forma correcta");
     }
+
+    /*Agregar usuario con doctor*/
+    /*@PostMapping("/registrar")
+    public ResponseEntity<Doctor> registrarDoctorConUsuario(@RequestBody RegistroDoctorDTO dto) {
+        try {
+            Doctor doctorRegistrado = doctorService.registrarDoctorConUsuario(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(doctorRegistrado);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null); // O puedes devolver un mensaje si prefieres ResponseEntity<String>
+        }
+    }*/
+    @PostMapping("/registrar")
+    public ResponseEntity<DoctorResponseDTO> registrarDoctor(@RequestBody RegistroDoctorDTO dto) {
+        Doctor doctor = doctorService.registrarDoctorConUsuario(dto);
+        DoctorResponseDTO responseDTO = doctorService.mapToDoctorResponseDTO(doctor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+    }
+
 }
