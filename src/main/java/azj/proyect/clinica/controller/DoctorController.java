@@ -3,6 +3,7 @@ package azj.proyect.clinica.controller;
 import azj.proyect.clinica.dto.DoctorResponseDTO;
 import azj.proyect.clinica.dto.RegistroDoctorDTO;
 import azj.proyect.clinica.entity.Doctor;
+import azj.proyect.clinica.mapper.DoctorMapper;
 import azj.proyect.clinica.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,8 @@ import java.util.List;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private DoctorMapper doctorMapper;
 
     @GetMapping
     public List<Doctor> listarDoctores() { return doctorService.obtenerTodos(); }
@@ -56,7 +59,7 @@ public class DoctorController {
     @PostMapping("/registrar")
     public ResponseEntity<DoctorResponseDTO> registrarDoctor(@RequestBody RegistroDoctorDTO dto) {
         Doctor doctor = doctorService.registrarDoctorConUsuario(dto);
-        DoctorResponseDTO responseDTO = doctorService.mapToDoctorResponseDTO(doctor);
+        DoctorResponseDTO responseDTO = doctorMapper.mapToDoctorResponseDTO(doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
