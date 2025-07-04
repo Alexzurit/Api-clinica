@@ -2,14 +2,8 @@ package azj.proyect.clinica.service;
 
 import azj.proyect.clinica.dto.DoctorResponseDTO;
 import azj.proyect.clinica.dto.RegistroDoctorDTO;
-import azj.proyect.clinica.entity.Doctor;
-import azj.proyect.clinica.entity.Rol;
-import azj.proyect.clinica.entity.Usuario;
-import azj.proyect.clinica.repository.DoctorRepository;
-import azj.proyect.clinica.entity.Especialidad;
-import azj.proyect.clinica.repository.EspecialidadRepository;
-import azj.proyect.clinica.repository.RolRepository;
-import azj.proyect.clinica.repository.UsuarioRepository;
+import azj.proyect.clinica.entity.*;
+import azj.proyect.clinica.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +20,8 @@ public class DoctorService {
     @Autowired
     private EspecialidadRepository especialidadRepository;
     /*NOSEEE*/
+    @Autowired
+    private CitaRepository citaRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -120,6 +116,11 @@ public class DoctorService {
 
         // Guardar doctor
         return doctorRepository.save(doctor);
+    }
+
+    /*los pacientes que tiene un doctor"*/
+    public List<Paciente> obtenerPacientesDelDoctor(int idDoctor) {
+        return citaRepository.findPacientesByDoctorId(idDoctor);
     }
 
 }

@@ -1,9 +1,12 @@
 package azj.proyect.clinica.controller;
 
 import azj.proyect.clinica.dto.DoctorResponseDTO;
+import azj.proyect.clinica.dto.PacienteDTO;
 import azj.proyect.clinica.dto.RegistroDoctorDTO;
 import azj.proyect.clinica.entity.Doctor;
+import azj.proyect.clinica.entity.Paciente;
 import azj.proyect.clinica.mapper.DoctorMapper;
+import azj.proyect.clinica.mapper.PacienteMapper;
 import azj.proyect.clinica.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/doctores")
@@ -19,6 +23,8 @@ public class DoctorController {
     private DoctorService doctorService;
     @Autowired
     private DoctorMapper doctorMapper;
+    @Autowired
+    private PacienteMapper pacienteMapper;
 
     @GetMapping
     public List<Doctor> listarDoctores() { return doctorService.obtenerTodos(); }
@@ -61,6 +67,15 @@ public class DoctorController {
         Doctor doctor = doctorService.registrarDoctorConUsuario(dto);
         DoctorResponseDTO responseDTO = doctorMapper.mapToDoctorResponseDTO(doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
+    }
+
+    @GetMapping("/{idDoctor}/pacientes")
+    public ResponseEntity<List<PacienteDTO>> listarPacientesPorDoctor(@PathVariable int idDoctor) {
+        List<Paciente> pacientes = doctorService.obtenerPacientesDelDoctor(idDoctor);
+        List<PacienteDTO> pacienteDTOs = pacientes.stream()
+                .map(pacienteMapper::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(pacienteDTOs);
     }
 
 }

@@ -19,10 +19,6 @@ public class Doctor {
 
     @Column(name = "nombres")
     private String nombres;
-    /*@Column(name = "apellidoPat")
-    private String apellidoPat;
-    @Column(name = "apellidoMat")
-    private String apellidoMat;*/
 
     @Column(name = "apellidos")
     private String apellidos;
@@ -30,8 +26,6 @@ public class Doctor {
     private String dni;
     @Column(name = "cmp")
     private String cmp;
-    //@Column(name = "correo") CORREO SE VA
-    //private String correo;
     @Column(name = "celular")
     private String celular;
     @Column(name = "estado")
