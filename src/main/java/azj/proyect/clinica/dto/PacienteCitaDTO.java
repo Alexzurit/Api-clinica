@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 
 public class PacienteCitaDTO {
+    private int idCita; //agregue esto
     private int idPaciente;
     private String nombres;
     private String apellidos;

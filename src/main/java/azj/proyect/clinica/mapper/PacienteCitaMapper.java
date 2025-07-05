@@ -20,6 +20,7 @@ public class PacienteCitaMapper {
         dto.setFechaCita(cita.getFecha());
         dto.setMotivoConsulta(cita.getMotivoCons());
         dto.setEstadoCita(cita.getEstado());
+        dto.setIdCita(cita.getIdCita()); //agregue esto
 
         return dto;
     }
