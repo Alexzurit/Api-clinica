@@ -41,6 +41,7 @@ public class HMedicoMapper {
         );
 
         return new HMedicoResponseDTO(
+                cita.getIdCita(), //agregue esto
                 historial.getIdHistorial(),
                 historial.getFechaRegistro(),
                 historial.getDiagnostico(),

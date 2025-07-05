@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HMedicoResponseDTO {
+    private int idCita; // agregue esto
     private int idHistorial;
     private LocalDateTime fechaRegistro;
     private String diagnostico;
