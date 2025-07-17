@@ -23,7 +23,8 @@ public class AuthController {
                         usuario.getEmail(),
                         usuario.getEstado(),
                         usuario.getFechaCreacion() != null ? usuario.getFechaCreacion().toString() : null,
-                        usuario.getRol().getIdRol()
+                        usuario.getRol().getIdRol(),
+                        usuario.getRol().getNombreRol()
                 )))
                 .orElseGet(() -> ResponseEntity
                         .status(401)

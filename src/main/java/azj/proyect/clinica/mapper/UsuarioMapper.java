@@ -28,7 +28,8 @@ public class UsuarioMapper {
                 //usuario.getFechaCreacion() != null ? usuario.getFechaCreacion().toString() : null
                 fechaFormateada,
                 //usuario.getIdUsuario()
-                usuario.getRol().getIdRol()
+                usuario.getRol().getIdRol(),
+                usuario.getRol().getNombreRol()
                 //asegura que si la fecha es null, no se lance una excepción y simplemente se envíe como null en el DTO
         );
     }

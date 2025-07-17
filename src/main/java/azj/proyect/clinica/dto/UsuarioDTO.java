@@ -13,4 +13,5 @@ public class UsuarioDTO {
     private EstadoUsuario estado;
     private String fechaCreacion;
     private Integer rolId; //para obtener el id de rol o su nombre;
+    private String nombreRol;
 }
