@@ -32,12 +32,10 @@ public class Disponibilidad {
 
     //
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
-    private LocalDate fechaInicio;
+    private String fechaInicio;
 
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
-    private LocalDate fechaFin;
+    private String fechaFin;
 
     @Column(name = "estado")
     private Short estado;
