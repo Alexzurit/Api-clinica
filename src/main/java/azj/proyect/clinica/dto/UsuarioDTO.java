@@ -12,4 +12,5 @@ public class UsuarioDTO {
     private String email;
     private EstadoUsuario estado;
     private String fechaCreacion;
+    private Integer rolId; //para obtener el id de rol o su nombre;
 }

@@ -19,9 +19,6 @@ public class Usuario {
     @Column(name = "id_usuario")
     private int idUsuario;
 
-    //@Column(name = "dni") DNI SE VA
-    //private String dni;
-
     @Column(name = "email")
     private String email;
 
@@ -32,21 +29,11 @@ public class Usuario {
     @Column(name = "estado")
     private EstadoUsuario estado;
 
-    /*@Column(name = "fecha_creacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaCreacion;*/
     @CreationTimestamp
     @Column(name = "fecha_creacion", updatable = false)
     private java.sql.Timestamp fechaCreacion;
 
-    /*@ManyToMany
-    @JoinTable(
-            name = "tb_usuario_rol",
-            joinColumns = @JoinColumn(name = "id_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "id_rol")
-    )*/
     @ManyToOne
     @JoinColumn(name = "id_rol", nullable = false)
     private Rol rol;
-    //private List<Rol> roles; //relacion con el rol
-    //private List<Rol> roles = new ArrayList<>(); //Lista modificable
 }
